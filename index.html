@@ -16,52 +16,59 @@
     <div class="center">
         <div id="calculadora">
             <header>
+                <div id ="date">
+                    
+                </div>
+                <div id="time">
+                    
+                </div>
                 <div id="display">
                     0
                 </div>
             </header>
             <section class="container">
                 <div class="row">
-                    <button type="button" class="btn btn-others col-sm">%</button>
-                    <button type="button" class="btn btn-others col-sm">√</button>
-                    <button type="button" class="btn btn-others col-sm">x²</button>
-                    <button type="button" class="btn btn-others col-sm">¹/x</button>
+                    <button type="button" class="btn btn-others col-sm porcento">%</button>
+                    <button type="button" class="btn btn-others col-sm raiz">√</button>
+                    <button type="button" class="btn btn-others col-sm quadrado">x²</button>
+                    <button type="button" class="btn btn-others col-sm fracao">¹/x</button>
                 </div>
                 <div class="row">
-                    <button type="button" class="btn btn-others col-sm">CE</button>
-                    <button type="button" class="btn btn-others col-sm">C</button>
+                    <button type="button" class="btn btn-others col-sm clearEntry">CE</button>
+                    <button type="button" class="btn btn-others col-sm clearAll">C</button>
                     <button type="button" class="btn btn-others col-sm">←</button>
-                    <button type="button" class="btn btn-others col-sm">÷</button>
+                    <button type="button" class="btn btn-others col-sm divisao">÷</button>
                 </div>
                 <div class="row">
-                    <button type="button" class="btn btn-number col-sm">7</button>
-                    <button type="button" class="btn btn-number col-sm">8</button>
-                    <button type="button" class="btn btn-number col-sm">9</button>
-                    <button type="button" class="btn btn-others col-sm">X</button>
+                    <button type="button" class="btn btn-number col-sm 7">7</button>
+                    <button type="button" class="btn btn-number col-sm 8">8</button>
+                    <button type="button" class="btn btn-number col-sm 9">9</button>
+                    <button type="button" class="btn btn-others col-sm multiplicacao">X</button>
                 </div>
                 <div class="row">
-                    <button type="button" class="btn btn-number col-sm">4</button>
-                    <button type="button" class="btn btn-number col-sm">5</button>
-                    <button type="button" class="btn btn-number col-sm">6</button>
-                    <button type="button" class="btn btn-others col-sm">-</button>
+                    <button type="button" class="btn btn-number col-sm 4">4</button>
+                    <button type="button" class="btn btn-number col-sm 5">5</button>
+                    <button type="button" class="btn btn-number col-sm 6">6</button>
+                    <button type="button" class="btn btn-others col-sm subtracao">-</button>
                 </div>
                 <div class="row">
-                    <button type="button" class="btn btn-number col-sm">1</button>
-                    <button type="button" class="btn btn-number col-sm">2</button>
-                    <button type="button" class="btn btn-number col-sm">3</button>
-                    <button type="button" class="btn btn-others col-sm">+</button>
+                    <button type="button" class="btn btn-number col-sm 1">1</button>
+                    <button type="button" class="btn btn-number col-sm 2">2</button>
+                    <button type="button" class="btn btn-number col-sm 3">3</button>
+                    <button type="button" class="btn btn-others col-sm soma">+</button>
                 </div>
                 <div class="row">
-                    <button type="button" class="btn btn-others col-sm">±</button>
-                    <button type="button" class="btn btn-number col-sm">0</button>
-                    <button type="button" class="btn btn-others col-sm">,</button>
-                    <button type="button" class="btn btn-others col-sm">=</button>
+                    <button type="button" class="btn btn-others col-sm maismenos">±</button>
+                    <button type="button" class="btn btn-number col-sm 0">0</button>
+                    <button type="button" class="btn btn-others col-sm ponto">,</button>
+                    <button type="button" class="btn btn-others col-sm igual">=</button>
                 </div>
             </section>
         </div>
     </div>
 
     <script src="script.js"></script>
+    <script> window.calculadora = new CalcController()</script>
 
 </body>
 </html>
