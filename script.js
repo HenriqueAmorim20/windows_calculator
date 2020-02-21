@@ -7,8 +7,8 @@ class CalcController {
         this._timeEl = document.querySelector(' #time')
         this.locale = 'pt-BR'
         this._memory = []
-        this._lastNumber=''
-        this._lastOperator =''
+        this._lastNumber = ''
+        this._lastOperator = ''
 
         this.initialize()
 
@@ -91,6 +91,12 @@ class CalcController {
             case '9':
                 this.addValue(value)
                 break
+            case ',':
+                this.addDot()
+                break
+            case '=':
+                this.calc()
+                break
             default:
                 this.addValue(value)
 
@@ -114,51 +120,118 @@ class CalcController {
 
     }
 
-    addValue(value){
+    addValue(value) {
 
-        this._memory.push(value)
+        if (isNaN(this.getLastSlot())) {
+
+            if (this.isOperator(value) && this.isOperator(this.getLastSlot())) {
+
+                this.setLastSlot(value)
+
+            } else {
+
+                this.pushOperator(value)
+
+            }
+
+        } else {
+
+            if (this.isOperator(value)) {
+
+                this.pushOperator(value)
+
+            } else {
+
+                this.setLastSlot(`${this.getLastSlot()}${value}`)
+
+            }
+
+        }
+
+        this.refreshDisplay()
+
+    }
+
+    addDot() {
+
+
+
+    }
+
+    calc() {
+
+        let last
+        if (this._memory.length > 3) {
+
+            last = this._memory.pop()
+
+        }
+
+        let result = this._memory.join('')
+        this._memory = [eval(result)]
+        if (last) this.pushOperator(last)
         this.refreshDisplay()
 
     }
 
     refreshDisplay() {
 
-        this.displayCalc = this.getLastItem(false)
         this._lastOperator = this.getLastItem(true)
         this._lastNumber = this.getLastItem(false)
+        if (this._memory.length == 0) {
+
+            this.displayCalc = '0'
+            return
+
+        }
+        this.displayCalc = this.getLastItem(false)
+
         console.log(this._memory)
+        console.log(this._memory.length)
 
     }
 
     getLastItem(operator = true) {
 
-        let lastItem = ''
-        for (let i = (this._memory.length-1); i >= 0; i--) {
+        let lastItem 
+        for (let i = (this._memory.length - 1); i >= 0; i--) {
             if (this.isOperator(this._memory[i]) === operator) {
-                 lastItem = this._memory[i]
-                 break
+                lastItem = this._memory[i]
+                break
             }
         }
 
-        if(!lastItem && lastItem!=0) {
-            lastItem = (operator) ? this._lastOperator:this._lastNumber
+        if (!lastItem && lastItem != 0) {
+            lastItem = (operator) ? this._lastOperator : this._lastNumber
         }
 
         return lastItem
 
     }
 
-    getLastNumber(){
+    getLastNumber() {
 
         this._lastNumber = this.getLastItem(false)
         return this._lastNumber
 
     }
 
-    getLastOperator(){
+    getLastOperator() {
 
         this._lastOperator = this.getLastItem(true)
         return this._lastOperator
+
+    }
+
+    pushOperator(value) {
+
+        this._memory.push(value)
+
+        if (this._memory.length > 3) {
+
+            this.calc()
+
+        }
 
     }
 
@@ -168,9 +241,15 @@ class CalcController {
 
     }
 
+    setLastSlot(value) {
+
+        this._memory[this._memory.length - 1] = value
+
+    }
+
     isOperator(value) {
 
-        return (['+', '-', 'X', '%', '√', 'x²', '¹/x', '÷', '±'].indexOf(value) > -1)
+        return (['+', '-', '*', '%', '√', 'x²', '¹/x', '÷', '±'].indexOf(value) > -1)
 
     }
 
