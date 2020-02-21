@@ -161,23 +161,41 @@ class CalcController {
     calc() {
 
         let last
-        if (this._memory.length > 3) {
+        this._lastOperator = this.getLastItem(true)
+
+        if (this._memory.length == 0) {
+
+            return
+
+        } else if (this._memory.length == 1) {
+
+            this._memory = [this.getResult(), this._lastOperator, this._lastNumber]
+            console.log(this._memory)
+
+        } else if (this._memory.length < 3) {
+
+            this._lastNumber = this.getLastItem(false)
+            this._memory.push(this._lastNumber)
+
+        } else if (this._memory.length == 3) {
+
+            this._lastNumber = this.getLastItem(false)
+
+        } else if (this._memory.length > 3) {
 
             last = this._memory.pop()
+            this._lastNumber = this.getResult()
 
         }
 
-        let result = this._memory.join('')
-        this._memory = [eval(result)]
-        if (last) this.pushOperator(last)
+        this._memory = [this.getResult()]
+        if (last) this._memory.push(last)
         this.refreshDisplay()
 
     }
 
     refreshDisplay() {
 
-        this._lastOperator = this.getLastItem(true)
-        this._lastNumber = this.getLastItem(false)
         if (this._memory.length == 0) {
 
             this.displayCalc = '0'
@@ -187,13 +205,18 @@ class CalcController {
         this.displayCalc = this.getLastItem(false)
 
         console.log(this._memory)
-        console.log(this._memory.length)
+
+    }
+
+    getResult() {
+
+        return eval(this._memory.join(''))
 
     }
 
     getLastItem(operator = true) {
 
-        let lastItem 
+        let lastItem
         for (let i = (this._memory.length - 1); i >= 0; i--) {
             if (this.isOperator(this._memory[i]) === operator) {
                 lastItem = this._memory[i]
