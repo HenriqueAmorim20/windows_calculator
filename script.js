@@ -91,6 +91,9 @@ class CalcController {
             case '9':
                 this.addValue(value)
                 break
+            case '÷':
+                this.addValue('/')
+                break
             case ',':
                 this.addDot()
                 break
@@ -272,7 +275,7 @@ class CalcController {
 
     isOperator(value) {
 
-        return (['+', '-', '*', '%', '√', 'x²', '¹/x', '÷', '±'].indexOf(value) > -1)
+        return (['+', '-', '*', '%', '√', 'x²', '¹/x', '/', '±'].indexOf(value) > -1)
 
     }
 
